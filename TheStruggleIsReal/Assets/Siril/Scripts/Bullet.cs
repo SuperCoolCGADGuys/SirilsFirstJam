@@ -7,11 +7,20 @@ public class Bullet : MonoBehaviour
 
     public GameObject hitEffect;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 5.0f);
-        Destroy(gameObject);
+        //create effect:
+       // GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+       // Destroy(effect, 5.0f);
+
+        if(collider.tag != "Player")
+        {
+            Debug.Log("Hit Something!!");
+            //deactivate the object:
+            gameObject.SetActive(false);
+        }
+
         
     }
+    
 }
