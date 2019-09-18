@@ -15,12 +15,14 @@ public class Bullet : MonoBehaviour
 
         if(collider.tag != "Player")
         {
-            Debug.Log("Hit Something!!");
             //deactivate the object:
             gameObject.SetActive(false);
         }
 
-        
+		if (collider.tag == "Enemy")
+		{
+			collider.GetComponent<EnemyHealthManager>().Damage(1);
+		}
     }
     
 }
