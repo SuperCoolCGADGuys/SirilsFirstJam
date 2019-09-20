@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
-    public GameObject bulletPrefab;
+   // public GameObject bulletPrefab;
 
     [SerializeField] private ObjectPooling bulletPool;
     public float bulletForce = 20.0f;
@@ -23,10 +23,6 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
-        // GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        // Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-
         GameObject newBullet = bulletPool.RetrieveInstance();
         newBullet.transform.position = firePoint.position;
         newBullet.transform.rotation = firePoint.rotation;

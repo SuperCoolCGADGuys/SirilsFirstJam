@@ -59,7 +59,7 @@ public class PlayerHealthManager : MonoBehaviour
 			flashCounter = flashLength;
 
 			// Shake the screen
-			CameraShaker.Instance.ShakeOnce(4f, 4f, .2f, .1f);
+			//CameraShaker.Instance.ShakeOnce(4f, 4f, .2f, .1f);
 		}
 	}
 
