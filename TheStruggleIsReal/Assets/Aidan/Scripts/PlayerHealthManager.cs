@@ -54,12 +54,12 @@ public class PlayerHealthManager : MonoBehaviour
 			{
 				currentHealth -= amount;
 			}
-			//gameObject.GetComponent<PlayerController>().KnockBack(knockBackDir, knockBackForce, knockBackTime);
+			gameObject.GetComponent<PlayerMovement>().KnockBack(knockBackDir, knockBackForce, knockBackTime);
 			elapsedInvincibilityTime = invincibilityTime;
 			flashCounter = flashLength;
 
 			// Shake the screen
-			//CameraShaker.Instance.ShakeOnce(4f, 4f, .2f, .1f);
+			CameraShaker.Instance.ShakeOnce(4f, 4f, .2f, .1f);
 		}
 	}
 

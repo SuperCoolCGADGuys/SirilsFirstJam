@@ -145,3 +145,4 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   knockbackForce: 5
   knockbackTime: 0.2
+  timeUntilBulletGetsDestroyed: 2
