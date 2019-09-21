@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 
 	public int EnemiesAlive { get; set; }
 	public int EnemiesKilled { get; set; }
+
+	[SerializeField] TextMeshProUGUI killCountText;
 
 	void Awake()
 	{
@@ -26,15 +29,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        
-    }
+		// Update the kill count text in the ui
+		killCountText.text = "KILL COUNT: " + EnemiesKilled;
+	}
 }

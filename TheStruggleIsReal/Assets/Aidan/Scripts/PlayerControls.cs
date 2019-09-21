@@ -24,6 +24,14 @@ public class PlayerControls : IInputActionCollection
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SlowDownTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8497e6c-b18b-4e2c-93b9-d85d4c0fcec7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -81,6 +89,17 @@ public class PlayerControls : IInputActionCollection
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26520137-d815-4810-ae43-191d23d80ca7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowDownTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -90,6 +109,7 @@ public class PlayerControls : IInputActionCollection
         // Gameplay
         m_Gameplay = asset.GetActionMap("Gameplay");
         m_Gameplay_Move = m_Gameplay.GetAction("Move");
+        m_Gameplay_SlowDownTime = m_Gameplay.GetAction("SlowDownTime");
     }
 
     ~PlayerControls()
@@ -140,11 +160,13 @@ public class PlayerControls : IInputActionCollection
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_SlowDownTime;
     public struct GameplayActions
     {
         private PlayerControls m_Wrapper;
         public GameplayActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @SlowDownTime => m_Wrapper.m_Gameplay_SlowDownTime;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -157,6 +179,9 @@ public class PlayerControls : IInputActionCollection
                 Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                SlowDownTime.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlowDownTime;
+                SlowDownTime.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlowDownTime;
+                SlowDownTime.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSlowDownTime;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -164,6 +189,9 @@ public class PlayerControls : IInputActionCollection
                 Move.started += instance.OnMove;
                 Move.performed += instance.OnMove;
                 Move.canceled += instance.OnMove;
+                SlowDownTime.started += instance.OnSlowDownTime;
+                SlowDownTime.performed += instance.OnSlowDownTime;
+                SlowDownTime.canceled += instance.OnSlowDownTime;
             }
         }
     }
@@ -171,5 +199,6 @@ public class PlayerControls : IInputActionCollection
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSlowDownTime(InputAction.CallbackContext context);
     }
 }

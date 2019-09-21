@@ -14,12 +14,15 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
     {
-        //create effect:
-        // GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        // Destroy(effect, 5.0f);
+		//create effect:
+		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+		// Destroy(effect, 5.0f);
 
-        //deactivate the object:
-        gameObject.SetActive(false);
+		//deactivate the object:
+		if (collider.tag != "PlayerBullet" && collider.tag != "EnemyBullet")
+		{
+			gameObject.SetActive(false);
+		}
         
         if (collider.tag == "Player" && gameObject.tag == "EnemyBullet")
         {
