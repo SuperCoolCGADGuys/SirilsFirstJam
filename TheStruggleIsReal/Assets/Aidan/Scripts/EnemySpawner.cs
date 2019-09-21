@@ -6,8 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
 	[SerializeField] private ObjectPooling enemyPool = null;
 	[SerializeField] private Transform spawnPositions = null;
-
-	private int noOfSpawnedEnemies = 0;
+	[SerializeField] private int numOfWavesToWaitToSpawnExtraEnemy = 1;
+	private int maxNoOfEnemiesToSpawn = 0;
 
 	private void Awake()
 	{
@@ -20,14 +20,20 @@ public class EnemySpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        
-    }
+		maxNoOfEnemiesToSpawn = (GameManager.Instance.EnemiesKilled / numOfWavesToWaitToSpawnExtraEnemy) + 1;
+
+		if (GameManager.Instance.EnemiesAlive < maxNoOfEnemiesToSpawn && GameManager.Instance.EnemiesAlive <= enemyPool.poolSize)
+		{
+			Spawn();
+		}
+
+	}
 
 	void Spawn()
 	{
 		// Retrieve a new enemy instance
 		GameObject newEnemy = enemyPool.RetrieveInstance();
-		noOfSpawnedEnemies++;
+		GameManager.Instance.EnemiesAlive++;
 
 		// Set it's position to one of the spawn positions
 		int randomChild = Random.Range(0, spawnPositions.childCount);

@@ -17,26 +17,21 @@ public class Bullet : MonoBehaviour
         //create effect:
         // GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         // Destroy(effect, 5.0f);
-        
-        if(collider.tag != "Player")
-        {
-            //deactivate the object:
-            gameObject.SetActive(false);
-        }
-        else if (gameObject.tag == "EnemyBullet")
-        {
-			//deactivate the object:
-			gameObject.SetActive(false);
 
+        //deactivate the object:
+        gameObject.SetActive(false);
+        
+        if (collider.tag == "Player" && gameObject.tag == "EnemyBullet")
+        {
 			// Handle player damage and knockback
 			Vector2 knockBackDir = collider.transform.position - transform.position;
 			knockBackDir = knockBackDir.normalized;
 			collider.GetComponent<PlayerHealthManager>().Damage(amountOfDamage, knockBackDir, knockbackForce, knockbackTime);
         }
 
-        if (collider.tag == "Enemy")
+        if (collider.tag == "Enemy" && gameObject.tag == "PlayerBullet")
 		{
-			collider.GetComponent<EnemyHealthManager>().Damage(1);
+			collider.GetComponent<EnemyHealthManager>().Damage(amountOfDamage);
 		}
     }
 
