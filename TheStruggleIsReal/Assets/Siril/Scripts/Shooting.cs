@@ -13,12 +13,16 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// This code shouldn't run if the game is paused
+		if (GameManager.Instance.GameIsPaused)
+		{
+			return;
+		}
+
         if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
-
         }
-
     }
 
     void Shoot()

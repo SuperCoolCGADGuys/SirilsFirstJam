@@ -54,11 +54,19 @@ public class TimeManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (timeLeft < 0.1f)
+		// If the game is paused we don't want this code to run, so return
+		if (GameManager.Instance.GameIsPaused)
+		{
+			return;
+		}
+
+		// If the bar runs out then turn off slowmo mode
+		if (timeLeft <= 0)
 		{
 			slowMoEnabled = false;
 		}
 
+		// Slow down when there is juice left in the bar and turn return time to normal when the control button is let go
 		if (slowMoEnabled && timeLeft > 0)
 		{
 			DoSlowMotion();
