@@ -17,11 +17,15 @@ public class Bullet : MonoBehaviour
 		//create effect:
 		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 		// Destroy(effect, 5.0f);
-
+        
 		//deactivate the object:
 		if (collider.tag != "PlayerBullet" && collider.tag != "EnemyBullet")
 		{
 			gameObject.SetActive(false);
+            if (gameObject.tag == "PlayerBullet")
+            {
+                GameManager.Instance.PlayerBulletsAlive--;
+            }
 		}
         
         if (collider.tag == "Player" && gameObject.tag == "EnemyBullet")
@@ -53,7 +57,11 @@ public class Bullet : MonoBehaviour
 			if (elapsedTimeSinceSpawned <= 0)
 			{
 				gameObject.SetActive(false);
-			}
+                if (gameObject.tag == "PlayerBullet")
+                {
+                    GameManager.Instance.PlayerBulletsAlive--;
+                }
+            }
 		}
 	}
 

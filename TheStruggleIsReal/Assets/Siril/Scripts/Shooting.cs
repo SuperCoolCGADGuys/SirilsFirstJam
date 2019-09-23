@@ -9,6 +9,10 @@ public class Shooting : MonoBehaviour
 
     [SerializeField] private ObjectPooling bulletPool;
     public float bulletForce = 20.0f;
+    //fire rate:
+    [SerializeField] private float fireRate = 1f;
+    private float timeToFire = 0.0f;
+
 
     // Update is called once per frame
     void Update()
@@ -19,9 +23,23 @@ public class Shooting : MonoBehaviour
 			return;
 		}
 
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
-            Shoot();
+            if (GameManager.Instance.PlayerBulletsAlive < bulletPool.poolSize)
+            {
+                if (fireRate == 0)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    if (Time.time > timeToFire)
+                    {
+                        timeToFire = Time.time + 1 / fireRate;
+                        Shoot();
+                    }
+                }
+            }
         }
     }
 
@@ -33,6 +51,10 @@ public class Shooting : MonoBehaviour
 
         Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+        GameManager.Instance.PlayerBulletsAlive++;
+
+        Debug.Log("Shot: " + GameManager.Instance.PlayerBulletsAlive);
 
     }
 }

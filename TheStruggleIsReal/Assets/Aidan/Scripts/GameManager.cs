@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
 	public int EnemiesAlive { get; set; }
 	public int EnemiesKilled { get; set; }
 
-	[SerializeField] TextMeshProUGUI killCountText = null;
+    public int PlayerBulletsAlive { get; set; }
+
+    [SerializeField] TextMeshProUGUI killCountText = null;
 	[SerializeField] GameObject pauseMenuObject = null;
 	[SerializeField] GameObject gameOverObject = null;
 
