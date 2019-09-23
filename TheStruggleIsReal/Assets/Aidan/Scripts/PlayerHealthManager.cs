@@ -9,7 +9,6 @@ public class PlayerHealthManager : MonoBehaviour
 	[SerializeField] private float invincibilityTime = 2f;
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] private float flashLength = 1f;
-	[SerializeField] Transform playerSpawnPosition = null;
 	private float elapsedInvincibilityTime = 0;
 	private float flashCounter;
 	private int currentHealth;
@@ -69,11 +68,5 @@ public class PlayerHealthManager : MonoBehaviour
 		// Play death animation sound and particles
 
 		GameManager.Instance.GameOver();
-	}
-
-	public void ResetPlayer()
-	{
-		transform.position = playerSpawnPosition.position;
-		currentHealth = maxHealth;
 	}
 }

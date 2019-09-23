@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI killCountText = null;
 	[SerializeField] GameObject pauseMenuObject = null;
 	[SerializeField] GameObject gameOverObject = null;
+	[SerializeField] GameObject mainMenuObject = null;
 
 	public bool GameIsPaused { set; get; }
 
@@ -32,11 +34,13 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			Instance = this;
-			DontDestroyOnLoad(this);
+			//DontDestroyOnLoad(this);
 		}
 
 		// Set up input
 		playerControls = new PlayerControls();
+
+		Debug.Log("GameManager awake!");
 	}
 
 	// Update is called once per frame
@@ -54,8 +58,7 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
-		gameOverObject.SetActive(false);
-		EnemiesKilled = 0;
+		SceneManager.LoadScene("AidansTestScene");
 	}
 
 	public void GameOver()
@@ -74,5 +77,7 @@ public class GameManager : MonoBehaviour
 	{
 		playerControls.Gameplay.Pause.performed -= ctx => TogglePause();
 		playerControls.Disable();
+
+		Debug.Log("GameManager disabled!");
 	}
 }

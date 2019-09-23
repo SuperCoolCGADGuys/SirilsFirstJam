@@ -53,8 +53,5 @@ public class Shooting : MonoBehaviour
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
         GameManager.Instance.PlayerBulletsAlive++;
-
-        Debug.Log("Shot: " + GameManager.Instance.PlayerBulletsAlive);
-
     }
 }

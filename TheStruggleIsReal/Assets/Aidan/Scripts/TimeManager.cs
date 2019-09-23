@@ -29,7 +29,10 @@ public class TimeManager : MonoBehaviour
 	{
 		if (Time.timeScale > slowDownFactor)
 		{
-			Time.timeScale -= (1f / slowInTime) * Time.unscaledDeltaTime;
+			if (Time.timeScale - (1f / slowInTime) * Time.unscaledDeltaTime > 0)
+			{
+				Time.timeScale -= (1f / slowInTime) * Time.unscaledDeltaTime;
+			}
 		}
 		else
 		{

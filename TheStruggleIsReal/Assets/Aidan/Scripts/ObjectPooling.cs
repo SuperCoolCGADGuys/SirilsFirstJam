@@ -39,5 +39,11 @@ public class ObjectPooling : MonoBehaviour
 		go.SetActive(false);
 	}
 
-
+	public void DevolveAll()
+	{
+		foreach (GameObject go in pool)
+		{
+			go.SetActive(false);
+		}
+	}
 }
