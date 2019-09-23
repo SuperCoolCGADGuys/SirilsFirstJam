@@ -28,6 +28,8 @@ public class EnemyHealthManager : MonoBehaviour
 
 		// Store the original sprite colour
 		originalSpriteColor = spriteRenderer.color;
+
+		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 	}
 
 	// Start is called before the first frame update

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] TextMeshProUGUI killCountText = null;
 	[SerializeField] GameObject pauseMenuObject = null;
+	[SerializeField] GameObject gameOverObject = null;
 
 	public bool GameIsPaused { set; get; }
 
@@ -51,7 +52,14 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
+		gameOverObject.SetActive(false);
+		EnemiesKilled = 0;
+	}
 
+	public void GameOver()
+	{
+		// Checks if the game over screen is active or not and does the opposite
+		gameOverObject.SetActive(true);
 	}
 
 	private void OnEnable()
