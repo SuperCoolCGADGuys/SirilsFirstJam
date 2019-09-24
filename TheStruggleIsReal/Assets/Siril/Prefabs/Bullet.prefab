@@ -142,7 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88e910e46f81ed46bd7a1bb9a1449c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
   knockbackForce: 5
   knockbackTime: 0.2
   timeUntilBulletGetsDestroyed: 2
+  amountOfDamage: 1
+  bulletHitEffect: {fileID: 6725765329458265694, guid: 70dc78a0e04b9ad4097facf9bfde3e4e,
+    type: 3}

@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
-    public GameObject hitEffect;
     [SerializeField] private float knockbackForce;
     [SerializeField] private float knockbackTime;
 	[SerializeField] private float timeUntilBulletGetsDestroyed = 5f;
 	[SerializeField] private int amountOfDamage = 1;
 	private float elapsedTimeSinceSpawned = 0;
 
+    public GameObject bulletHitEffect;
 	private void OnTriggerEnter2D(Collider2D collider)
     {
-		//create effect:
-		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-		// Destroy(effect, 5.0f);
-        
-		//deactivate the object:
-		if (collider.tag != "PlayerBullet" && collider.tag != "EnemyBullet")
+        //create effect:
+        GameObject effect = Instantiate(bulletHitEffect, transform.position, transform.rotation);
+        Destroy(effect, 5.0f);
+
+        //deactivate the object:
+        if (collider.tag != "PlayerBullet" && collider.tag != "EnemyBullet")
 		{
 			gameObject.SetActive(false);
             if (gameObject.tag == "PlayerBullet")
@@ -39,7 +38,8 @@ public class Bullet : MonoBehaviour
         if (collider.tag == "Enemy" && gameObject.tag == "PlayerBullet")
 		{
 			collider.GetComponent<EnemyHealthManager>().Damage(amountOfDamage);
-		}
+
+        }
     }
 
 	private void OnEnable()
