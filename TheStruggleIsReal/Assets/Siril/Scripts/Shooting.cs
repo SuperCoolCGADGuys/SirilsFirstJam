@@ -54,4 +54,9 @@ public class Shooting : MonoBehaviour
 
         GameManager.Instance.PlayerBulletsAlive++;
     }
+
+	public void ResetBullets()
+	{
+		bulletPool.DevolveAll();
+	}
 }

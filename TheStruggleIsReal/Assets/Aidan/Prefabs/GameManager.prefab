@@ -46,3 +46,6 @@ MonoBehaviour:
   killCountText: {fileID: 0}
   pauseMenuObject: {fileID: 0}
   gameOverObject: {fileID: 0}
+  mainMenuObject: {fileID: 0}
+  playerHealthManager: {fileID: 0}
+  enemySpawner: {fileID: 0}

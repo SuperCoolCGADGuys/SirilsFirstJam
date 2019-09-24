@@ -9,6 +9,8 @@ public class PlayerHealthManager : MonoBehaviour
 	[SerializeField] private float invincibilityTime = 2f;
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] private float flashLength = 1f;
+	[SerializeField] private Transform spawnPosition = null;
+
 	private float elapsedInvincibilityTime = 0;
 	private float flashCounter;
 	private int currentHealth;
@@ -68,5 +70,16 @@ public class PlayerHealthManager : MonoBehaviour
 		// Play death animation sound and particles
 
 		GameManager.Instance.GameOver();
+	}
+
+	public void ResetPlayer()
+	{
+		currentHealth = maxHealth;
+		Shooting shooting = GetComponent<Shooting>();
+		shooting.ResetBullets();
+		transform.position = spawnPosition.position;
+		elapsedInvincibilityTime = 0;
+		flashCounter = 0;
+		spriteRenderer.enabled = true;
 	}
 }

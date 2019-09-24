@@ -11,15 +11,17 @@ public class GameManager : MonoBehaviour
 
 	public int EnemiesAlive { get; set; }
 	public int EnemiesKilled { get; set; }
-
+	public int HighScore { get; set; }
+	public bool GameIsPaused { set; get; }
     public int PlayerBulletsAlive { get; set; }
 
-    [SerializeField] TextMeshProUGUI killCountText = null;
-	[SerializeField] GameObject pauseMenuObject = null;
-	[SerializeField] GameObject gameOverObject = null;
-	[SerializeField] GameObject mainMenuObject = null;
+    [SerializeField] private TextMeshProUGUI killCountText = null;
+	[SerializeField] private GameObject pauseMenuObject = null;
+	[SerializeField] private GameObject gameOverObject = null;
+	[SerializeField] private GameObject mainMenuObject = null;
+	[SerializeField] private PlayerHealthManager playerHealthManager = null;
+	[SerializeField] private EnemySpawner enemySpawner = null;
 
-	public bool GameIsPaused { set; get; }
 
 	void Awake()
 	{
@@ -34,7 +36,6 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			Instance = this;
-			//DontDestroyOnLoad(this);
 		}
 
 		// Set up input
@@ -48,6 +49,11 @@ public class GameManager : MonoBehaviour
 	{
 		// Update the kill count text in the ui
 		killCountText.text = "KILL COUNT: " + EnemiesKilled;
+
+		if (EnemiesKilled > HighScore)
+		{
+			HighScore = EnemiesKilled;
+		}
 	}
 
 	private void TogglePause()
@@ -58,7 +64,10 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
-		SceneManager.LoadScene("AidansTestScene");
+		playerHealthManager.ResetPlayer();
+		enemySpawner.ResetSpawner();
+		EnemiesKilled = 0;
+		EnemiesAlive = 0;
 	}
 
 	public void GameOver()
@@ -71,6 +80,8 @@ public class GameManager : MonoBehaviour
 	{
 		playerControls.Gameplay.Pause.performed += ctx => TogglePause();
 		playerControls.Enable();
+
+		Debug.Log("GameManager enabled!");
 	}
 
 	private void OnDisable()

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
 	[SerializeField] GameObject HUDObject;
+	[SerializeField] TextMeshProUGUI scoreText;
+	[SerializeField] TextMeshProUGUI highScoreText;
 
 	public void ResetButtonPressed()
 	{
@@ -22,6 +25,8 @@ public class GameOverManager : MonoBehaviour
 		Time.timeScale = 0f;
 		HUDObject.SetActive(false);
 		GameManager.Instance.GameIsPaused = true;
+		scoreText.text = "Score: " + GameManager.Instance.EnemiesKilled;
+		highScoreText.text = "High Score: " + GameManager.Instance.HighScore;
 	}
 
 	private void OnDisable()

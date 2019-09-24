@@ -66,10 +66,10 @@ public class EnemyHealthManager : MonoBehaviour
 		// Increment player kill count
 		GameManager.Instance.EnemiesKilled++;
 
-		Reset();
+		ResetEnemy();
 	}
 
-	public void Reset()
+	public void ResetEnemy()
 	{
 		currentHealth = maxHealth;
 		anim.SetTrigger("Reset");

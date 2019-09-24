@@ -39,4 +39,9 @@ public class EnemySpawner : MonoBehaviour
 		int randomChild = Random.Range(0, spawnPositions.childCount);
 		newEnemy.transform.position = spawnPositions.GetChild(randomChild).position;
 	}
+
+	public void ResetSpawner()
+	{
+		enemyPool.DevolveAll();
+	}
 }
