@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] private ObjectPooling enemyPool = null;
 	[SerializeField] private Transform spawnPositions = null;
 	[SerializeField] private int numOfWavesToWaitToSpawnExtraEnemy = 1;
+	[SerializeField] private float spawningTime = 0;
+	[SerializeField] private GameObject spawningParticles = null;
 	private int maxNoOfEnemiesToSpawn = 0;
 
 	private void Awake()
@@ -31,12 +33,21 @@ public class EnemySpawner : MonoBehaviour
 
 	void Spawn()
 	{
+		int randomChild = Random.Range(0, spawnPositions.childCount);
+		GameObject particles = Instantiate(spawningParticles, spawnPositions.GetChild(randomChild).position, Quaternion.identity);
+		StartCoroutine(WaitForParticlesToFinish(particles, randomChild));
+		GameManager.Instance.EnemiesAlive++;
+	}
+
+	IEnumerator WaitForParticlesToFinish(GameObject particles, int randomChild)
+	{
+		yield return new WaitForSeconds(spawningTime);
+		Destroy(particles);
+
 		// Retrieve a new enemy instance
 		GameObject newEnemy = enemyPool.RetrieveInstance();
-		GameManager.Instance.EnemiesAlive++;
 
 		// Set it's position to one of the spawn positions
-		int randomChild = Random.Range(0, spawnPositions.childCount);
 		newEnemy.transform.position = spawnPositions.GetChild(randomChild).position;
 	}
 
