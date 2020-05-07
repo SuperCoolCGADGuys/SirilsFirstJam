@@ -14,6 +14,7 @@ public class PauseManager : MonoBehaviour
 	public void QuitButtonPressed()
 	{
 		Debug.Log("Quit!");
+		Application.Quit();
 	}
 
 	private void OnEnable()

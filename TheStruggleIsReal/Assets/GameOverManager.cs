@@ -18,6 +18,7 @@ public class GameOverManager : MonoBehaviour
 	public void QuitButtonPressed()
 	{
 		Debug.Log("Quit!");
+		Application.Quit();
 	}
 
 	private void OnEnable()
